@@ -30,7 +30,8 @@ const courseToCard = ({
 };
 const resultsContainer = document.querySelector("#filtered-results");
 const courseCards = data.items.map(courseToCard);
-resultsContainer.innerHTML = courseCards.join("");
+let filteredCourseCards = courseCards;
+resultsContainer.innerHTML = filteredCourseCards.join("");
 // courseCards.forEach((c) => document.write(c));
 
 // console.log(courseCards);
@@ -53,11 +54,19 @@ searchButton.addEventListener("click", (ev) => {
   const searchField = document.querySelector('input[name="query-text"]');
   const queryText = searchField.value;
   console.log(queryText);
-  const filteredCourseCards = courseCards.filter((card) =>
+  filteredCourseCards = courseCards.filter((card) =>
     filterCourseCard(card, queryText)
   );
   console.log('filteredCourseCards', filteredCourseCards);
   resultsContainer.innerHTML = filteredCourseCards.join("");
+  updateCount();
 });
 
 // 3. we update the result count and related summary info as we filter
+function updateCount() {
+  const count = document.getElementById("result-count");
+  const countValue = filteredCourseCards.length;
+  count.innerText = `${countValue} items`;
+}
+
+updateCount();
