@@ -45,15 +45,18 @@ const filterCourseCard = (markup, query) => {
   return markup.toLowerCase().includes(query.toLowerCase());
 };
 
-const searchButton = document.getElementById("search-btn");
-searchButton.addEventListener("click", (ev) => {
+// const searchButton = document.getElementById("search-btn");
+const searchField = document.querySelector('input[name="query-text"]');
+
+searchField.addEventListener("input", (ev) => {
   console.log(ev);
   ev.preventDefault();
   // ev.stopPropagation();
   console.log("query text");
-  const searchField = document.querySelector('input[name="query-text"]');
+  
   const queryText = searchField.value;
   console.log(queryText);
+  // debugger
   filteredCourseCards = courseCards.filter((card) =>
     filterCourseCard(card, queryText)
   );
