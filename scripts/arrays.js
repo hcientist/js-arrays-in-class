@@ -1,5 +1,38 @@
-console.log(data);
+// console.log(data);
 // 1. instead of creating the cards manually, we should use array functions to convert the data into cards
+
+// now we need to get the data in some other way
+
+// 1. we need to get the data from somewhere
+
+const locationOfData = "data.json"
+
+//calback version
+function reqListener() {
+  console.log("reqListener");
+  const structuredData = JSON.parse(this.responseText);
+  console.log("structuredData", structuredData);
+}
+// const req = new XMLHttpRequest();
+// req.addEventListener("load", reqListener);
+// req.open("GET", locationOfData);
+// req.send();
+
+//promises version
+
+function logWhenSuccessful (response) {
+  console.log("response", response);
+  return response;
+}
+
+function dealWithException (err) {
+  console.error(err);
+}
+
+const responsePromise = fetch(locationOfData)
+responsePromise.then(logWhenSuccessful)
+responsePromise.catch(dealWithException)
+
 
 const courseToCard = ({
   prefix,
